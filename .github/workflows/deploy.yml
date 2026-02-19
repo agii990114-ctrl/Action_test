@@ -10,8 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 출력하기
-        run:  |
-          echo "github actions"
-          echo $GITHUB_SHA
-          echo $GITHUB_REPOSITORY
-          echo ${{ secrets.USE_NAME }}
+        uses: actions/checkout@v3
+
+      - name: Python 환경 설정
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+
+      - name: Run python
+        run: python app.py
